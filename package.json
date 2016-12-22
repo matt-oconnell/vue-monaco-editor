@@ -3,7 +3,7 @@
   "description": "Monaco Editor Vue Component",
   "version": "1.0.0",
   "author": "matt-oconnell <mattoconnell408@gmail.com>",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
