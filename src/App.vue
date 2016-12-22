@@ -14,8 +14,9 @@
 
 <script>
 import Monaco from './Monaco.vue';
+const Monaco= require('./Monaco.vue')
 
-export default {
+module.exports = {
   components: {
     Monaco
   },

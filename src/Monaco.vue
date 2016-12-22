@@ -7,7 +7,7 @@
 <script>
 function noop() {}
 
-export default {
+module.exports = {
   template: '#container', // todo vue loader
   props: {
     width: { type: [String, Number], default: '100%' },
