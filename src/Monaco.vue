@@ -1,6 +1,7 @@
 <template>
   <div :style="style">
-    <button v-on:click="clickHandler">Change value</button>
+    <button v-on:click="clickHandler">Log value</button>
+    <input v-model="highlight" placeholder="highlight line #">
   </div>
 </template>
 
@@ -32,6 +33,11 @@ module.exports = {
       }
     }
   },
+  data() {
+    return {
+      highlight: 0
+    }
+  },
   destroyed() {
     this.destroyMonaco();
   },
@@ -49,28 +55,38 @@ module.exports = {
       };
     }
   },
+  watch: {
+    highlight(val) {
+      val = parseInt(val);
+      const highlighted = this.$el.querySelector('.highlighted-line');
+
+      if (highlighted) {
+        highlighted.classList.remove('highlighted-line');
+      }
+
+      if (!this.editor && val < 1 || isNaN(val)) {
+        return;
+      }
+
+      const line = this.$el.querySelector(`[linenumber="${val}"]`);
+      if (line) {
+        line.classList.add('highlighted-line');
+      }
+    }
+  },
   methods: {
     clickHandler() {
       console.log('here is the code:', this.editor.getValue());
     },
-    // editorWillMount(monaco) {
-    //   const { editorWillMount } = this;
-    //   editorWillMount(monaco);
-    // },
     editorDidMount(editor, monaco) {
       console.log('editorDidMount', editor, editor.getValue(), editor.getModel());
       this.editor = editor;
-      // const { editorDidMount, onChange } = this;
-      // editorDidMount(editor, monaco);
-      // editor.onDidChangeModelContent(event => {
-      //   const value = editor.getValue();
-      //   // Only invoking when user input changed
-      //   if (!this.__prevent_trigger_change_event) {
-      //     onChange(value, event);
-      //   }
-      //   // Always refer to the latest value
-      //   this.__current_value = value;
-      // });
+      this.monaco = monaco;
+      this.editor.onDidChangeModelContent(event => {
+        const value = editor.getValue();
+        console.log(value);
+        // todo: allow hook for model change
+      });
     },
     afterViewInit() {
       const { requireConfig } = this;
@@ -133,7 +149,7 @@ module.exports = {
       if (typeof context.monaco !== 'undefined') {
         // Before initializing monaco editor
         // this.editorWillMount(context.monaco);
-        const data = Object.assign({ value, language, theme }, { options});
+        const data = Object.assign({ value, language, theme }, { options }, { glyphMargin: true });
         this.editor = context.monaco.editor.create(containerElement, data);
         // After initializing monaco editor
         this.editorDidMount(this.editor, context.monaco);
@@ -147,3 +163,9 @@ module.exports = {
   }
 };
 </script>
+
+<style media="screen">
+  .highlighted-line {
+    background: blue;
+  }
+</style>

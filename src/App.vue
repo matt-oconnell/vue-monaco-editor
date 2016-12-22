@@ -2,7 +2,6 @@
   <div>
     <Monaco
         height="600"
-        width="50%"
         language="javascript"
         :value="code"
         :options="options"
