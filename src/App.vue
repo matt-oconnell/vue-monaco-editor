@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import Monaco from './Monaco.vue';
 const Monaco= require('./Monaco.vue')
 
 module.exports = {
