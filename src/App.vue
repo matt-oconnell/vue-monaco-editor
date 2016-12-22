@@ -1,0 +1,44 @@
+<template>
+  <div>
+    <Monaco
+        height="600"
+        width="50%"
+        language="javascript"
+        :value="code"
+        :options="options"
+        :editorDidMount="editorDidMount"
+        >
+    </Monaco>
+  </div>
+</template>
+
+<script>
+import Monaco from './Monaco.vue';
+
+export default {
+  components: {
+    Monaco
+  },
+  data() {
+    return {
+      code: '// type your code \n'
+    };
+  },
+  methods: {
+    editorDidMount(editor) {
+      console.log('editorDidMount', editor, editor.getValue(), editor.getModel());
+      this.editor = editor;
+    }
+  },
+  created() {
+    this.options = {
+      selectOnLineNumbers: true,
+      roundedSelection: false,
+      readOnly: false,
+      theme: 'vs',
+      cursorStyle: 'line',
+      automaticLayout: false,
+    };
+  }
+};
+</script>
