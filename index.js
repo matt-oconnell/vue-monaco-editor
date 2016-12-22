@@ -1,13 +1,3 @@
-var editor = require('./src/App.vue')
-var monacoEditorBuild = function(Vue) {
- Vue.component('monaco-editor', player)
-}
+var monaco = require('./src/Monaco.vue')
 
-var monacoEditor = {
- monacoEditor: editor,
- install: function(Vue) {
-   monacoEditorBuild(Vue)
- }
-}
-
-module.exports = monacoEditor
+module.exports = monaco

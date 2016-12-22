@@ -1,7 +1,7 @@
 {
   "name": "vue-monaco-editor",
   "description": "Monaco Editor Vue Component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "matt-oconnell <mattoconnell408@gmail.com>",
   "private": false,
   "scripts": {
@@ -10,6 +10,13 @@
   },
   "dependencies": {
     "vue": "^2.1.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "vueify"
+      ]
+    ]
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -20,6 +27,7 @@
     "file-loader": "^0.9.0",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.1.0",
+    "vueify": "^9.4.0",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"
   }
