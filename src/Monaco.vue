@@ -11,6 +11,7 @@ module.exports = {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '100%' },
     code: { type: String, default: '// type your code \n' },
+    cdn: { type: String, default: 'https://as.alipayobjects.com/g/cicada/monaco-editor-mirror/0.6.1/min/vs' },
     language: { type: String, default: 'javascript' },
     theme: { type: String, default: 'vs' },
     options: { type: Object, default: {} },
@@ -111,7 +112,7 @@ module.exports = {
     },
     fetchEditor() {
       // loads script on page for now with AMD until msoft changes to import
-      monacoLoader.load('node_modules/monaco-editor/min/vs', this.createMonaco);
+      monacoLoader.load(this.cdn || 'node_modules/monaco-editor/min/vs', this.createMonaco);
     },
     createMonaco() {
       this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
