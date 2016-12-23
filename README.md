@@ -84,7 +84,6 @@ module.exports = {
   },
   methods: {
     onMounted(editor) {
-      console.log('after mount!', editor, editor.getValue(), editor.getModel());
       this.editor = editor;
     },
     onCodeChange(editor) {
