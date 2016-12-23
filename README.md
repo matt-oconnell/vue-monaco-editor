@@ -87,10 +87,10 @@ module.exports = {
       this.editor = editor;
     },
     onCodeChange(editor) {
-      console.log('code changed!', 'code:' + this.editor.getValue());
+      console.log(this.editor.getValue());
     },
     clickHandler() {
-      console.log('here is the code:', this.editor.getValue());
+      console.log(this.editor.getValue());
     }
   },
   created() {
