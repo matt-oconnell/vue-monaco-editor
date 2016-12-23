@@ -1,8 +1,5 @@
 <template>
-  <div :style="style">
-    <button v-on:click="clickHandler">Log value</button>
-    <input v-model="highlight" placeholder="highlight line #">
-  </div>
+  <div :style="style"></div>
 </template>
 
 <script>
@@ -17,8 +14,11 @@ module.exports = {
     defaultValue: { type: String, default: '' },
     language: { type: String, default: 'javascript' },
     theme: { type: String, default: 'vs' },
-    options: { type: Object, default: {} },
-    editorDidMount: { type: Function, default: noop },
+    editorOptions: { type: Object, default: {} },
+    highlighted: { type: Array, default: () => [{
+      number: 0,
+      class: ''
+    }] },
     editorWillMount: { type: Function, default: noop },
     onChange: { type: Function, default: noop },
     requireConfig: {
@@ -31,11 +31,6 @@ module.exports = {
           }
         };
       }
-    }
-  },
-  data() {
-    return {
-      highlight: 0
     }
   },
   destroyed() {
@@ -55,38 +50,56 @@ module.exports = {
       };
     }
   },
-  watch: {
-    highlight(val) {
-      val = parseInt(val);
-      const highlighted = this.$el.querySelector('.highlighted-line');
-
-      if (highlighted) {
-        highlighted.classList.remove('highlighted-line');
-      }
-
-      if (!this.editor && val < 1 || isNaN(val)) {
-        return;
-      }
-
-      const line = this.$el.querySelector(`[linenumber="${val}"]`);
-      if (line) {
-        line.classList.add('highlighted-line');
+  data() {
+    return {
+      options: {
+        selectOnLineNumbers: true,
+        roundedSelection: false,
+        readOnly: false,
+        theme: 'vs',
+        cursorStyle: 'line',
+        automaticLayout: false,
       }
     }
   },
+  watch: {
+    highlighted: {
+      handler(lines) {
+        if (!this.editor) {
+          return;
+        }
+        lines.forEach((line) => {
+          const className = line.class;
+          number = parseInt(line.number);
+          console.log(typeof number, number);
+          const highlighted = this.$el.querySelector(`.${className}`);
+
+          if (highlighted) {
+            highlighted.classList.remove(className);
+          }
+
+          if (!this.editor && number < 1 || isNaN(number)) {
+            return;
+          }
+
+          const selectedLine = this.$el.querySelector(`[linenumber="${number}"]`);
+          if (selectedLine) {
+            selectedLine.classList.add(className);
+          }
+        });
+      },
+      deep: true
+    }
+  },
   methods: {
-    clickHandler() {
-      console.log('here is the code:', this.editor.getValue());
-    },
     editorDidMount(editor, monaco) {
-      console.log('editorDidMount', editor, editor.getValue(), editor.getModel());
+      console.log('internal: editorDidMount');
       this.editor = editor;
       this.monaco = monaco;
       this.editor.onDidChangeModelContent(event => {
-        const value = editor.getValue();
-        console.log(value);
-        // todo: allow hook for model change
+        this.$emit('codeChange', editor);
       });
+      this.$emit('mounted', editor);
     },
     afterViewInit() {
       const { requireConfig } = this;
@@ -143,13 +156,14 @@ module.exports = {
     },
     initMonaco() {
       const value = this.value !== null ? this.value : this.defaultValue;
-      const { language, theme, options } = this;
+      const { language, theme } = this;
+      const options = Object.assign({}, this.options, this.editorOptions);
       const containerElement = this.$el;
       const context = this.context || window;
       if (typeof context.monaco !== 'undefined') {
         // Before initializing monaco editor
         // this.editorWillMount(context.monaco);
-        const data = Object.assign({ value, language, theme }, { options }, { glyphMargin: true });
+        const data = Object.assign(options, { value, language, theme }, { glyphMargin: true });
         this.editor = context.monaco.editor.create(containerElement, data);
         // After initializing monaco editor
         this.editorDidMount(this.editor, context.monaco);
@@ -163,9 +177,3 @@ module.exports = {
   }
 };
 </script>
-
-<style media="screen">
-  .highlighted-line {
-    background: blue;
-  }
-</style>
