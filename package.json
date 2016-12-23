@@ -1,7 +1,7 @@
 {
   "name": "vue-monaco-editor",
-  "description": "Monaco Editor Vue Component",
-  "version": "0.0.1",
+  "description": "Monaco Editor Component for Vue.js 2.x",
+  "version": "0.0.2",
   "author": "matt-oconnell <mattoconnell408@gmail.com>",
   "main": "index.js",
   "private": false,
@@ -9,15 +9,23 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
-  "dependencies": {
-    "vue": "^2.1.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matt-oconnell/vue-monaco-editor.git"
   },
+  "bugs": {
+    "url": "https://github.com/matt-oconnell/vue-monaco-editor/issues"
+  },
+  "homepage": "https://github.com/matt-oconnell/vue-monaco-editor",
   "browserify": {
     "transform": [
       [
         "vueify"
       ]
     ]
+  },
+  "dependencies": {
+    "vue": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
