@@ -1,3 +1,3 @@
-var monaco = require('./src/App.vue')
+var monaco = require('./src/Monaco.vue')
 
 module.exports = monaco

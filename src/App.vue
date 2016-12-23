@@ -3,14 +3,14 @@
     <Monaco
         height="600"
         language="javascript"
-        :value="code"
+        :code="code"
         :editorOptions="options"
         :highlighted="highlightLines"
         @mounted="onMounted"
         @codeChange="onCodeChange"
         >
     </Monaco>
-    <button v-on:click="clickHandler">Log value</button>
+    <button @click="clickHandler">Log value</button>
     <input v-model="highlightLines[0].number" placeholder="primary highlight #">
     <input v-model="highlightLines[1].number" placeholder="secondary highlight #">
   </div>

@@ -3,15 +3,13 @@
 </template>
 
 <script>
-function noop() {}
-
 module.exports = {
   template: '#container', // todo vue loader
   props: {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '100%' },
-    value: { type: String, default: null },
-    defaultValue: { type: String, default: '' },
+    code: { type: String, default: null },
+    defaultValue: { type: String, default: '// type your code \n' },
     language: { type: String, default: 'javascript' },
     theme: { type: String, default: 'vs' },
     editorOptions: { type: Object, default: {} },
@@ -19,8 +17,6 @@ module.exports = {
       number: 0,
       class: ''
     }] },
-    editorWillMount: { type: Function, default: noop },
-    onChange: { type: Function, default: noop },
     requireConfig: {
       type: Object,
       default: () => {
@@ -155,16 +151,15 @@ module.exports = {
       }
     },
     initMonaco() {
-      const value = this.value !== null ? this.value : this.defaultValue;
+      const code = this.code !== null ? this.code : this.defaultValue;
       const { language, theme } = this;
       const options = Object.assign({}, this.options, this.editorOptions);
       const containerElement = this.$el;
       const context = this.context || window;
       if (typeof context.monaco !== 'undefined') {
         // Before initializing monaco editor
-        // this.editorWillMount(context.monaco);
-        const data = Object.assign(options, { value, language, theme }, { glyphMargin: true });
-        this.editor = context.monaco.editor.create(containerElement, data);
+        const editorOptions = Object.assign(options, { value: code, language, theme }, { glyphMargin: true });
+        this.editor = context.monaco.editor.create(containerElement, editorOptions);
         // After initializing monaco editor
         this.editorDidMount(this.editor, context.monaco);
       }
