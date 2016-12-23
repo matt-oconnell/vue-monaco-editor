@@ -56,6 +56,9 @@ export default {
     @codeChange="onCodeChange"
     >
 </MonacoEditor>
+<button @click="clickHandler">Log value</button>
+<input v-model="highlightLines[0].number" placeholder="primary highlight #">
+<input v-model="highlightLines[1].number" placeholder="secondary highlight #">
 ```
 
 *Parent*
