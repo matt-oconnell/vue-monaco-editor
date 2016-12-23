@@ -4,7 +4,7 @@
         height="600"
         language="javascript"
         :code="code"
-        :editorOptions="options"
+        :options="options"
         :highlighted="highlightLines"
         :codeChangeCallbackThrottle="0"
         @mounted="onMounted"
