@@ -112,7 +112,7 @@ module.exports = {
     },
     fetchEditor() {
       // loads script on page for now with AMD until msoft changes to import
-      monacoLoader.load(this.cdn || 'node_modules/monaco-editor/min/vs', this.createMonaco);
+      monacoLoader.load(this.cdn, this.createMonaco);
     },
     createMonaco() {
       this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
