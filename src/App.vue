@@ -6,6 +6,7 @@
         :code="code"
         :editorOptions="options"
         :highlighted="highlightLines"
+        :codeChangeCallbackThrottle="0"
         @mounted="onMounted"
         @codeChange="onCodeChange"
         >

@@ -31,6 +31,7 @@ export default {
 | code | String | "// type your code \n" | Initial code to show |
 | theme | String | "vs" | |
 | highlighted | Array[Object] | `[{ number: 0, class: ''}]` | Lines to highlight with numbers and `.classes` |
+| codeChangeCallbackThrottle | Number | 0 | milliseconds to throttle callback bound to `codeChange` event |
 | editorOptions | Object | { ... } | see [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) |
 
 ## Component Events
@@ -39,7 +40,7 @@ export default {
 
 | Event        | Returns          | Description
 |:-------------|:-------------|:-------|
-|mounted|`editor`[editor instance]|Emitted when editor has mounted| 
+|mounted|`editor`[editor instance]|Emitted when editor has mounted|
 |codeChange|`editor`[editor instance]|Emitted when code has changed|
 
 ## Example

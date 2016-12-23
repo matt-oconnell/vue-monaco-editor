@@ -3,6 +3,8 @@
 </template>
 
 <script>
+var debounce = require('lodash.debounce');
+
 module.exports = {
   template: '#container', // todo vue loader
   props: {
@@ -17,6 +19,7 @@ module.exports = {
       number: 0,
       class: ''
     }] },
+    codeChangeCallbackThrottle: { type: Number, default: 0 },
     requireConfig: {
       type: Object,
       default: () => {
@@ -93,9 +96,22 @@ module.exports = {
       this.editor = editor;
       this.monaco = monaco;
       this.editor.onDidChangeModelContent(event => {
-        this.$emit('codeChange', editor);
+        this.codeChangeHandler(editor);
       });
       this.$emit('mounted', editor);
+    },
+    codeChangeHandler: function(editor) {
+      if (this.codeChangeEmitter) {
+        this.codeChangeEmitter(editor);
+      } else {
+        this.codeChangeEmitter = debounce(
+          function(editor) {
+            this.$emit('codeChange', editor);
+          },
+          this.codeChangeCallbackThrottle
+        );
+        this.codeChangeEmitter(editor);
+      }
     },
     afterViewInit() {
       const { requireConfig } = this;

@@ -25,6 +25,7 @@
     ]
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "vue": "^2.1.0"
   },
   "devDependencies": {
