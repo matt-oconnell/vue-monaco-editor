@@ -13,7 +13,7 @@ module.exports = {
     code: { type: String, default: '// type your code \n' },
     cdn: { type: String, default: 'https://as.alipayobjects.com/g/cicada/monaco-editor-mirror/0.6.1/min/vs' },
     language: { type: String, default: 'javascript' },
-    theme: { type: String, default: 'vs' },
+    theme: { type: String, default: 'vs-dark' }, // vs, hc-black
     options: { type: Object, default: {} },
     highlighted: { type: Array, default: () => [{
       number: 0,

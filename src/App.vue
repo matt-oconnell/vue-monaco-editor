@@ -7,6 +7,7 @@
         :options="options"
         :highlighted="highlightLines"
         :codeChangeCallbackThrottle="0"
+        theme="vs-dark"
         @mounted="onMounted"
         @codeChange="onCodeChange"
         >
