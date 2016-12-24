@@ -2,7 +2,7 @@ module.exports = {
   load(basePath, callback) {
     const config = {
       paths: {
-        vs: 'node_modules/monaco-editor/min/vs'
+        vs: basePath || 'node_modules/monaco-editor/min/vs'
       }
     };
     const loaderUrl = `${config.paths.vs}/loader.js`;
