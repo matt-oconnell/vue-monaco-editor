@@ -83,7 +83,7 @@ module.exports = {
           return;
         }
 
-        const selectedLine = this.$el.querySelector(`[linenumber="${number}"]`);
+        const selectedLine = this.$el.querySelector(`.view-lines [linenumber="${number}"]`);
         if (selectedLine) {
           selectedLine.classList.add(className);
         }
