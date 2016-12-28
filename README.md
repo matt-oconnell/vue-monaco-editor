@@ -57,14 +57,10 @@ export default {
     language="javascript"
     :code="code"
     :editorOptions="options"
-    :highlighted="highlightLines"
     @mounted="onMounted"
     @codeChange="onCodeChange"
     >
 </MonacoEditor>
-<button @click="clickHandler">Log value</button>
-<input v-model="highlightLines[0].number" placeholder="primary highlight #">
-<input v-model="highlightLines[1].number" placeholder="secondary highlight #">
 ```
 
 *Parent*
@@ -75,17 +71,10 @@ module.exports = {
   },
   data() {
     return {
-      code: '// type your code \n',
-      highlightLines: [
-        {
-          number: 0,
-          class: 'primary-highlighted-line'
-        },
-        {
-          number: 0,
-          class: 'secondary-highlighted-line'
-        }
-      ]
+      code: '// Type away! \n',
+      options: {
+        selectOnLineNumbers: false
+      }
     };
   },
   methods: {
@@ -94,15 +83,7 @@ module.exports = {
     },
     onCodeChange(editor) {
       console.log(this.editor.getValue());
-    },
-    clickHandler() {
-      console.log(this.editor.getValue());
     }
-  },
-  created() {
-    this.options = {
-      selectOnLineNumbers: false
-    };
   }
 };
 ```
