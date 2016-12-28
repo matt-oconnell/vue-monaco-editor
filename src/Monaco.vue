@@ -10,7 +10,7 @@ module.exports = {
   props: {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '100%' },
-    code: { type: String, default: '// type your code \n' },
+    code: { type: String, default: '// code \n' },
     srcPath: { type: String, default: '' },
     language: { type: String, default: 'javascript' },
     theme: { type: String, default: 'vs-dark' }, // vs, hc-black
@@ -19,7 +19,7 @@ module.exports = {
       number: 0,
       class: ''
     }] },
-    codeChangeCallbackThrottle: { type: Number, default: 0 }
+    changeThrottle: { type: Number, default: 0 }
   },
   created() {
     this.fetchEditor();
@@ -105,7 +105,7 @@ module.exports = {
           function(editor) {
             this.$emit('codeChange', editor);
           },
-          this.codeChangeCallbackThrottle
+          this.changeThrottle
         );
         this.codeChangeEmitter(editor);
       }
