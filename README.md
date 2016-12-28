@@ -2,6 +2,8 @@
 
 > Monaco Editor Vue Component
 
+> Work in Progress!
+
 ## Setup
 
 ``` bash
