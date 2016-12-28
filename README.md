@@ -2,6 +2,10 @@
 
 > Monaco Editor Vue Component
 
+> Work in Progress!
+
+> Based off [React Monaco Editor](https://github.com/superRaytin/react-monaco-editor)
+
 ## Setup
 
 ``` bash
@@ -101,3 +105,13 @@ module.exports = {
   }
 };
 ```
+
+## Dev Use
+
+```
+git clone [this repo] .
+npm install
+npm run dev
+```
+
+Edit `src/App.vue`
