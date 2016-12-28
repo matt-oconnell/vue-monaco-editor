@@ -29,15 +29,15 @@ export default {
 
 | Option        | Type          | Default | Description
 |:-------------|:-------------|:-------|:-------|
-| language      | String        | "javascript" | |
-| height        | Number/String | "100%" ||
-| width | Number/String | "100%" ||
-| code | String | "// code \n" | Initial code to show |
-| theme | String | "vs" | |
+| language      | String        | `javascript` | |
+| height        | Number/String | `100%` ||
+| width | Number/String | `100%` ||
+| code | String | `// code \n` | Initial code to show |
+| theme | String | `vs-dark` | vs, hc-black, or vs-dark |
 | highlighted | Array[Object] | `[{ number: 0, class: ''}]` | Lines to highlight with numbers and `.classes` |
-| changeThrottle | Number | 0 | milliseconds to throttle callback bound to `codeChange` event |
-|srcPath| String | "" | see *Webpack Use*
-| editorOptions | Object | { ... } | see [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) |
+| changeThrottle | Number | `0` | milliseconds to throttle callback bound to `codeChange` event |
+|srcPath| String | `""` | see *Webpack Use*
+| editorOptions | Object | `{ ... }` | see [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) |
 
 ## Component Events
 
