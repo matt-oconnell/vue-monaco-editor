@@ -53,7 +53,7 @@ export default {
 ```vue
 <MonacoEditor
     height="600"
-    language="javascript"
+    language="typescript"
     :code="code"
     :editorOptions="options"
     :highlighted="highlightLines"

@@ -2,12 +2,12 @@
   <div>
     <Monaco
         height="600"
-        language="javascript"
+        language="typescript"
         srcPath="dist"
         :code="code"
         :options="options"
         :highlighted="highlightLines"
-        :codeChangeCallbackThrottle="0"
+        :changeThrottle="500"
         theme="vs-dark"
         @mounted="onMounted"
         @codeChange="onCodeChange"
