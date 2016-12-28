@@ -2,14 +2,16 @@ module.exports = {
   load(basePath, callback) {
     const config = {
       paths: {
-        vs: basePath || 'node_modules/monaco-editor/min/vs'
+        vs: basePath + '/vs'
       }
     };
     const loaderUrl = `${config.paths.vs}/loader.js`;
     const onGotAmdLoader = () => {
+
       if (window.LOADER_PENDING) {
         window.require.config(config);
       }
+
       // Load monaco
       window.require(['vs/editor/editor.main'], () => {
         callback();

@@ -11,7 +11,7 @@ module.exports = {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '100%' },
     code: { type: String, default: '// type your code \n' },
-    cdn: { type: String, default: 'https://as.alipayobjects.com/g/cicada/monaco-editor-mirror/0.6.1/min/vs' },
+    cdn: { type: String, default: 'dist' },
     language: { type: String, default: 'javascript' },
     theme: { type: String, default: 'vs-dark' }, // vs, hc-black
     options: { type: Object, default: {} },
