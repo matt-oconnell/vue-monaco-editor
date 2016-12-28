@@ -20,7 +20,7 @@
 </template>
 
 <script>
-const Monaco= require('./Monaco.vue')
+const Monaco = require('./Monaco.vue')
 
 module.exports = {
   components: {

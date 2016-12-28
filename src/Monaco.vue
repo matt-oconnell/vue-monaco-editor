@@ -21,7 +21,7 @@ module.exports = {
     }] },
     changeThrottle: { type: Number, default: 0 }
   },
-  created() {
+  mounted() {
     this.fetchEditor();
   },
   destroyed() {
@@ -111,7 +111,6 @@ module.exports = {
       }
     },
     fetchEditor() {
-      // loads script on page for now with AMD until msoft changes to import
       monacoLoader.load(this.srcPath, this.createMonaco);
     },
     createMonaco() {
