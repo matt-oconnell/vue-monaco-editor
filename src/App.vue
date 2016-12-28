@@ -3,6 +3,7 @@
     <Monaco
         height="600"
         language="javascript"
+        srcPath="dist"
         :code="code"
         :options="options"
         :highlighted="highlightLines"

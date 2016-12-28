@@ -11,7 +11,7 @@ module.exports = {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '100%' },
     code: { type: String, default: '// type your code \n' },
-    cdn: { type: String, default: 'dist' },
+    srcPath: { type: String, default: '' },
     language: { type: String, default: 'javascript' },
     theme: { type: String, default: 'vs-dark' }, // vs, hc-black
     options: { type: Object, default: {} },
@@ -112,7 +112,7 @@ module.exports = {
     },
     fetchEditor() {
       // loads script on page for now with AMD until msoft changes to import
-      monacoLoader.load(this.cdn, this.createMonaco);
+      monacoLoader.load(this.srcPath, this.createMonaco);
     },
     createMonaco() {
       this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
