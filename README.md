@@ -2,9 +2,9 @@
 
 > Monaco Editor Vue Component
 
-> Work in Progress!
-
 > Based off [React Monaco Editor](https://github.com/superRaytin/react-monaco-editor)
+
+> [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
 ## Setup
 
