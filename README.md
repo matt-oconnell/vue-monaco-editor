@@ -4,6 +4,8 @@
 
 > Work in Progress!
 
+> Based off [React Monaco Editor](https://github.com/superRaytin/react-monaco-editor)
+
 ## Setup
 
 ``` bash
