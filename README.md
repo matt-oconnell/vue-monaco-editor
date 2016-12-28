@@ -40,8 +40,8 @@ export default {
 | editorOptions | Object | See below for defaults | See [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) |
 
 ### Editor Default Options
-```json
-{
+```js
+defaults: {
   selectOnLineNumbers: true,
   roundedSelection: false,
   readOnly: false,
