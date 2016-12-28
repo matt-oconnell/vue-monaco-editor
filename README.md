@@ -37,7 +37,19 @@ export default {
 | highlighted | Array[Object] | `[{ number: 0, class: ''}]` | Lines to highlight with numbers and `.classes` |
 | changeThrottle | Number(ms) | `0` |  throttle `codeChange` emit |
 |srcPath| String | `""` | see *Webpack Use*
-| editorOptions | Object | `{ ... }` | see [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) |
+| editorOptions | Object | See below for defaults | See [Monaco Editor Options](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) |
+
+### Editor Default Options
+```json
+{
+  selectOnLineNumbers: true,
+  roundedSelection: false,
+  readOnly: false,
+  cursorStyle: 'line',
+  automaticLayout: false,
+  glyphMargin: true
+}
+```
 
 ## Component Events
 
