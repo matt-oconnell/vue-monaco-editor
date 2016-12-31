@@ -1,9 +1,23 @@
 <template>
   <div>
+    <!-- Load from webpack (note the srcPath="dist" prop) -->
     <Monaco
         height="600"
         language="typescript"
         srcPath="dist"
+        :code="code"
+        :options="options"
+        :highlighted="highlightLines"
+        :changeThrottle="500"
+        theme="vs-dark"
+        @mounted="onMounted"
+        @codeChange="onCodeChange"
+        >
+    </Monaco>
+    <!-- Load from default cdn -->
+    <Monaco
+        height="600"
+        language="typescript"
         :code="code"
         :options="options"
         :highlighted="highlightLines"

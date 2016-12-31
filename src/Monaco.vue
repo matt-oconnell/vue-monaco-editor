@@ -11,7 +11,7 @@ module.exports = {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '100%' },
     code: { type: String, default: '// code \n' },
-    srcPath: { type: String, default: '' },
+    srcPath: { type: String },
     language: { type: String, default: 'javascript' },
     theme: { type: String, default: 'vs-dark' }, // vs, hc-black
     options: { type: Object, default: {} },
