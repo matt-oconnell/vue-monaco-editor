@@ -94,7 +94,7 @@ module.exports = {
       this.editor = editor;
     },
     onCodeChange(editor) {
-      console.log(this.editor.getValue());
+      console.log(editor.getValue());
     }
   }
 };
