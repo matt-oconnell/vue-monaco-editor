@@ -63,6 +63,12 @@ module.exports = {
         this.highlightLines(lines);
       },
       deep: true
+    },
+    code() {
+        if (!this.editor){
+          return;
+        }
+        this.editor.getModel().setValue(this.code);
     }
   },
   methods: {
