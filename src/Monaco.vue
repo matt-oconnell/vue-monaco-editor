@@ -19,6 +19,11 @@ module.exports = {
       number: 0,
       class: ''
     }] },
+    decorations: {type: Array, default: () => [{
+      lines: [],
+      class: ''
+    }]},
+    scrollToLine: {type: Number, default: 0},
     changeThrottle: { type: Number, default: 0 }
   },
   mounted() {
@@ -54,7 +59,8 @@ module.exports = {
         cursorStyle: 'line',
         automaticLayout: false,
         glyphMargin: true
-      }
+      },
+      decorationKeys: []
     }
   },
   watch: {
@@ -63,9 +69,38 @@ module.exports = {
         this.highlightLines(lines);
       },
       deep: true
+    },
+    code() {
+        if (!this.editor){
+          return;
+        }
+        this.editor.getModel().setValue(this.code);
+    },
+    decorations: {
+      handler(lines) {
+        this.decorateLines(lines);
+      }
+    },
+    scrollToLine: {
+       handler(lineNumber) {
+
+        this.scrollTo(lineNumber);
+      }
     }
   },
   methods: {
+    scrollTo(lineNumber){
+        
+        const number = parseInt(lineNumber);
+        if (!this.editor && number < 1 || isNaN(number)) {
+          return;
+        }
+
+        //Center the edirot on the line we are scrolling to
+        const offSet = this.editor.getTopForLineNumber(number) - window.innerHeight/2;
+        this.editor.setScrollTop(offSet);
+
+    },
     highlightLines(lines) {
       if (!this.editor) {
         return;
@@ -88,6 +123,19 @@ module.exports = {
           selectedLine.classList.add(className);
         }
       });
+    },
+    decorateLines(decorations){
+      if (!this.editor) {
+        return;
+      }
+      var decorationsArray = [];
+
+      decorations.forEach((decoration) => {
+          decorationsArray.push({ range: new this.monaco.Range(...decoration.lines), options: { inlineClassName: decoration.class}});
+      });
+
+      this.decorationKeys = this.editor.getModel().deltaDecorations(this.decorationKeys, decorationsArray);
+
     },
     editorHasLoaded(editor, monaco) {
       this.editor = editor;
