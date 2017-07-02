@@ -63,6 +63,9 @@ module.exports = {
         this.highlightLines(lines);
       },
       deep: true
+    },
+    language () {
+      window.monaco.editor.setModelLanguage(this.editor.getModel(), this.language)
     }
   },
   methods: {
