@@ -19,7 +19,8 @@ module.exports = {
       number: 0,
       class: ''
     }] },
-    changeThrottle: { type: Number, default: 0 }
+    changeThrottle: { type: Number, default: 0 },
+    diffEdittor: { type: Boolean, default: false}
   },
   mounted() {
     this.fetchEditor();
@@ -117,7 +118,20 @@ module.exports = {
       monacoLoader.load(this.srcPath, this.createMonaco);
     },
     createMonaco() {
-      this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
+      var isDiffEditor = this.diffEdittor;
+
+      if (isDiffEditor) {
+        var diffEdtiorOptions = Object.assign({}, this.editorOptions, {
+          // You can optionally disable the resizing
+          enableSplitViewResizing: false,
+
+          // Render the diff inline
+          renderSideBySide: false
+        });
+        this.editor = window.monaco.editor.createDiffEditor(this.$el, this.editorOptions);
+      } else {
+        this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
+      }
       this.editorHasLoaded(this.editor, window.monaco);
     },
     destroyMonaco() {
