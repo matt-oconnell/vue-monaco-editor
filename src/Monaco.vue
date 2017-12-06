@@ -54,7 +54,8 @@ module.exports = {
         readOnly: false,
         cursorStyle: 'line',
         automaticLayout: false,
-        glyphMargin: true
+        glyphMargin: true,
+        diffEdittor: false
       }
     }
   },
@@ -117,8 +118,22 @@ module.exports = {
     fetchEditor() {
       monacoLoader.load(this.srcPath, this.createMonaco);
     },
+    setDiffModels: function (editor, original, modified) {
+      var originalModel = window.monaco.editor.createModel(original, "solidity");
+      var modifiedModel = window.monaco.editor.createModel(modified, "solidity");
+
+      editor.setModel({
+        original: originalModel,
+        modified: modifiedModel
+      });
+
+      editor.setModel({
+        original: originalModel,
+        modified: modifiedModel
+      });
+    },
     createMonaco() {
-      var isDiffEditor = this.diffEdittor;
+      var isDiffEditor = this.editorOptions.diffEditor;
 
       if (isDiffEditor) {
         var diffEdtiorOptions = Object.assign({}, this.editorOptions, {
@@ -126,9 +141,15 @@ module.exports = {
           enableSplitViewResizing: false,
 
           // Render the diff inline
-          renderSideBySide: false
+          renderSideBySide: false,
+          renderIndicators: false,
+          quickSuggestions: false,
+          diffOverviewRuler: {
+            enabled: false
+          },
+          renderLineHighlight: "line"
         });
-        this.editor = window.monaco.editor.createDiffEditor(this.$el, this.editorOptions);
+        this.editor = window.monaco.editor.createDiffEditor(this.$el, diffEdtiorOptions);
       } else {
         this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
       }
