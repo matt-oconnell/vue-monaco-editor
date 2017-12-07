@@ -2,9 +2,19 @@
 
 > Monaco Editor Vue Component
 
-> Based off [React Monaco Editor](https://github.com/superRaytin/react-monaco-editor)
+> forked from https://github.com/matt-oconnell/vue-monaco-editor
 
 > [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
+## New feature: DiffEditor
+
+```
+  options: {
+    diffEditor: true,
+  }
+```
+
+by passing `diffEditor` option to this vue component, a diff editor is created instead of regular monaco editor
 
 ## Setup
 
