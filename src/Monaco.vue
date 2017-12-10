@@ -106,12 +106,15 @@ module.exports = {
       if (this.codeChangeEmitter) {
         this.codeChangeEmitter(editor);
       } else {
-        this.codeChangeEmitter = debounce(
-          function(editor) {
-            this.$emit('codeChange', editor);
-          },
-          this.changeThrottle
-        );
+        if(!this.editorOptions.diffEditor) {
+          this.codeChangeEmitter = debounce(
+            function(editor) {
+              this.$emit('codeChange', editor);
+            },
+            this.changeThrottle
+          );
+
+        }
         this.codeChangeEmitter(editor);
       }
     },
