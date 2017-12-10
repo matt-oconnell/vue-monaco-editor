@@ -97,24 +97,23 @@ module.exports = {
     editorHasLoaded(editor, monaco) {
       this.editor = editor;
       this.monaco = monaco;
-      this.editor.onDidChangeModelContent(event =>
-        this.codeChangeHandler(editor, event)
-      );
+      if(!this.editorOptions.diffEditor) {
+        this.editor.onDidChangeModelContent(event =>
+          this.codeChangeHandler(editor, event)
+        );
+      }
       this.$emit('mounted', editor);
     },
     codeChangeHandler: function(editor) {
       if (this.codeChangeEmitter) {
         this.codeChangeEmitter(editor);
       } else {
-        if(!this.editorOptions.diffEditor) {
-          this.codeChangeEmitter = debounce(
-            function(editor) {
-              this.$emit('codeChange', editor);
-            },
-            this.changeThrottle
-          );
-
-        }
+        this.codeChangeEmitter = debounce(
+          function(editor) {
+            this.$emit('codeChange', editor);
+          },
+          this.changeThrottle
+        );
         this.codeChangeEmitter(editor);
       }
     },
