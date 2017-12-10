@@ -1,7 +1,7 @@
 {
   "name": "vue-monaco-editor",
   "description": "Monaco Editor Component for Vue.js 2.x",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "author": "matt-oconnell <mattoconnell408@gmail.com>",
   "main": "index.js",
   "private": false,

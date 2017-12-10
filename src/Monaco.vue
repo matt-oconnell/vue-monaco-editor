@@ -64,8 +64,11 @@ module.exports = {
       },
       deep: true
     },
-    language () {
-      window.monaco.editor.setModelLanguage(this.editor.getModel(), this.language)
+    code(value) {
+      if (this.editor.getValue() !== value) {
+        this.codePropChange = true
+        this.editor.setValue(value)
+      }
     }
   },
   methods: {
@@ -101,6 +104,10 @@ module.exports = {
       this.$emit('mounted', editor);
     },
     codeChangeHandler: function(editor) {
+      if (this.codePropChange) {
+        this.codePropChange = false
+        return
+      }
       if (this.codeChangeEmitter) {
         this.codeChangeEmitter(editor);
       } else {
