@@ -34,9 +34,9 @@
 </template>
 
 <script>
-const Monaco = require('./Monaco.vue')
+import Monaco from './Monaco.vue'
 
-module.exports = {
+export default {
   components: {
     Monaco
   },
