@@ -20,7 +20,8 @@ module.exports = {
       class: ''
     }] },
     changeThrottle: { type: Number, default: 0 },
-    diffEdittor: { type: Boolean, default: false}
+    diffEdittor: { type: Boolean, default: false},
+    autoUpdate: { type: Boolean, default: false}
   },
   mounted() {
     this.fetchEditor();
@@ -60,6 +61,11 @@ module.exports = {
     }
   },
   watch: {
+    code(newValue) {
+      if (this.autoUpdate) {
+        this.editor.setValue(newValue);
+      }
+    },
     highlighted: {
       handler(lines) {
         this.highlightLines(lines);
