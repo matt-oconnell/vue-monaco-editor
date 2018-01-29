@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = {
   /* For now: default to cdn. */
   load(srcPath = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.10.1/min', callback) {
@@ -15,12 +17,14 @@ module.exports = {
 
       if (window.LOADER_PENDING) {
         window.require.config(config);
-        window.MonacoEnvironment = {
-          getWorkerUrl: function(workerId, label) {
-            return 'monaco-editor-worker-loader-proxy.js';
-          }
-        };
       }
+
+      // Load workerscript via proxy
+      window.MonacoEnvironment = {
+        getWorkerUrl: function(workerId, label) {
+          return '/monaco-editor-worker-loader-proxy.js';
+        }
+      };
 
       // Load monaco
       window.require(['vs/editor/editor.main'], () => {

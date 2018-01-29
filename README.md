@@ -134,6 +134,21 @@ module.exports = {
 
 Then, specify the build directory path in the `srcPath` prop. See `src/App.vue` for an example.
 
+## Integrate cross domain webworker
+
+Add this to your webpack.config.js:
+
+```js
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+module.exports = {
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: './node_modules/vue-monaco-editor/src/monaco-editor-worker-loader-proxy.js' }
+    ])
+  ]
+};
+```
+
 ## Dev Use
 
 ```
