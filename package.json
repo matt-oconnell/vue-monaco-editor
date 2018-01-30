@@ -1,8 +1,8 @@
 {
-  "name": "vue-monaco-editor",
-  "description": "Monaco Editor Component for Vue.js 2.x",
-  "version": "0.0.18",
-  "author": "matt-oconnell <mattoconnell408@gmail.com>",
+  "name": "vue-monaco-editor-loom",
+  "description": "Monaco Editor Component for Vue.js 2.x. Forked from matt-oconnel's package with added diffeditor functionality",
+  "version": "0.1.0",
+  "author": "luke-zhang <luke@loomx.io>, matt-oconnell <mattoconnell408@gmail.com>",
   "main": "index.js",
   "private": false,
   "scripts": {
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/matt-oconnell/vue-monaco-editor.git"
+    "url": "https://github.com/loomnetwork/vue-monaco-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/matt-oconnell/vue-monaco-editor/issues"
+    "url": "https://github.com/loomnetwork/vue-monaco-editor/issues"
   },
-  "homepage": "https://github.com/matt-oconnell/vue-monaco-editor",
+  "homepage": "https://github.com/loomnetwork/vue-monaco-editor",
   "browserify": {
     "transform": [
       [

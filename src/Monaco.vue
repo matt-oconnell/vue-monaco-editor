@@ -19,7 +19,9 @@ module.exports = {
       number: 0,
       class: ''
     }] },
-    changeThrottle: { type: Number, default: 0 }
+    changeThrottle: { type: Number, default: 0 },
+    diffEdittor: { type: Boolean, default: false},
+    autoUpdate: { type: Boolean, default: false}
   },
   mounted() {
     this.fetchEditor();
@@ -53,11 +55,17 @@ module.exports = {
         readOnly: false,
         cursorStyle: 'line',
         automaticLayout: false,
-        glyphMargin: true
+        glyphMargin: true,
+        diffEdittor: false
       }
     }
   },
   watch: {
+    code(newValue) {
+      if (this.autoUpdate) {
+        this.editor.setValue(newValue);
+      }
+    },
     highlighted: {
       handler(lines) {
         this.highlightLines(lines);
@@ -95,9 +103,11 @@ module.exports = {
     editorHasLoaded(editor, monaco) {
       this.editor = editor;
       this.monaco = monaco;
-      this.editor.onDidChangeModelContent(event =>
-        this.codeChangeHandler(editor, event)
-      );
+      if(!this.editorOptions.diffEditor) {
+        this.editor.onDidChangeModelContent(event =>
+          this.codeChangeHandler(editor, event)
+        );
+      }
       this.$emit('mounted', editor);
     },
     codeChangeHandler: function(editor) {
@@ -116,8 +126,41 @@ module.exports = {
     fetchEditor() {
       monacoLoader.load(this.srcPath, this.createMonaco);
     },
+    setDiffModels: function (editor, original, modified) {
+      var originalModel = window.monaco.editor.createModel(original, "solidity");
+      var modifiedModel = window.monaco.editor.createModel(modified, "solidity");
+
+      editor.setModel({
+        original: originalModel,
+        modified: modifiedModel
+      });
+
+      editor.setModel({
+        original: originalModel,
+        modified: modifiedModel
+      });
+    },
     createMonaco() {
-      this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
+      var isDiffEditor = this.editorOptions.diffEditor;
+
+      if (isDiffEditor) {
+        var diffEdtiorOptions = Object.assign({}, this.editorOptions, {
+          // You can optionally disable the resizing
+          enableSplitViewResizing: false,
+
+          // Render the diff inline
+          renderSideBySide: false,
+          renderIndicators: false,
+          quickSuggestions: false,
+          diffOverviewRuler: {
+            enabled: false
+          },
+          renderLineHighlight: "line"
+        });
+        this.editor = window.monaco.editor.createDiffEditor(this.$el, diffEdtiorOptions);
+      } else {
+        this.editor = window.monaco.editor.create(this.$el, this.editorOptions);
+      }
       this.editorHasLoaded(this.editor, window.monaco);
     },
     destroyMonaco() {

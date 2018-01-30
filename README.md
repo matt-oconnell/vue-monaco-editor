@@ -2,9 +2,19 @@
 
 > Monaco Editor Vue Component
 
-> Based off [React Monaco Editor](https://github.com/superRaytin/react-monaco-editor)
+> forked from https://github.com/matt-oconnell/vue-monaco-editor
 
 > [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
+## New feature: DiffEditor
+
+```
+  options: {
+    diffEditor: true,
+  }
+```
+
+by passing `diffEditor` option to this vue component, a diff editor is created instead of regular monaco editor
 
 ## Setup
 
@@ -123,6 +133,21 @@ module.exports = {
 ```
 
 Then, specify the build directory path in the `srcPath` prop. See `src/App.vue` for an example.
+
+## Integrate cross domain webworker
+
+Add this to your webpack.config.js:
+
+```js
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+module.exports = {
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: './node_modules/vue-monaco-editor/src/monaco-editor-worker-loader-proxy.js' }
+    ])
+  ]
+};
+```
 
 ## Dev Use
 
