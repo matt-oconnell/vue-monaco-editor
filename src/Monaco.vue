@@ -3,10 +3,10 @@
 </template>
 
 <script>
-var debounce = require('lodash.debounce');
-var monacoLoader = require('./MonacoLoader');
+import debounce from 'lodash.debounce'
+import monacoLoader from './MonacoLoader'
 
-module.exports = {
+export default {
   props: {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '100%' },
@@ -64,8 +64,11 @@ module.exports = {
       },
       deep: true
     },
-    language () {
-      window.monaco.editor.setModelLanguage(this.editor.getModel(), this.language)
+    code(value) {
+      if (this.editor && this.editor.getValue() !== value) {
+        this.codePropChange = true
+        this.editor.setValue(value)
+      }
     }
   },
   methods: {
@@ -100,7 +103,11 @@ module.exports = {
       );
       this.$emit('mounted', editor);
     },
-    codeChangeHandler: function(editor) {
+    codeChangeHandler(editor) {
+      if (this.codePropChange) {
+        this.codePropChange = false
+        return
+      }
       if (this.codeChangeEmitter) {
         this.codeChangeEmitter(editor);
       } else {
