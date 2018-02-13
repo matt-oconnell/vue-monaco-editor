@@ -1,5 +1,7 @@
 # vue-monaco-editor
 
+> !!!! This is not maintained !!!!
+
 > Monaco Editor Vue Component
 
 > Based off [React Monaco Editor](https://github.com/superRaytin/react-monaco-editor)
