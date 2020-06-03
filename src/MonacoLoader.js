@@ -46,7 +46,7 @@ module.exports = {
         fn: onGotAmdLoader
       });
     } else {
-      if (typeof window.require === 'undefined') {
+      if (!window.require) {
         const loaderScript = window.document.createElement('script');
         loaderScript.type = 'text/javascript';
         loaderScript.src = loaderUrl;
